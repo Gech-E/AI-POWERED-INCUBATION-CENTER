@@ -29,7 +29,7 @@ class Settings(BaseSettings):
     LLM_PROVIDER: str = "openai"  # "openai" or "google"
 
     # CORS — set FRONTEND_URL to your Vercel domain in production
-    FRONTEND_URL: str = ""
+    FRONTEND_URL: str = "https://ai-powered-incubation-center-msuq-mk7d273d6.vercel.app/"
 
     class Config:
         env_file = ".env"
