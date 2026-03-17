@@ -48,6 +48,16 @@ app.include_router(networking.router, prefix="/api/networking", tags=["Networkin
 app.include_router(dashboard.router,  prefix="/api/dashboard",  tags=["Dashboard"])
 app.include_router(chatbot.router,    prefix="/api/chatbot",    tags=["AI Chatbot"])
 
+@app.get("/", include_in_schema=False)
+def root():
+    """Root endpoint for platform health checks (Render/Vercel)."""
+    return {"status": "ok", "service": settings.APP_NAME, "version": settings.APP_VERSION}
+
+
+@app.head("/", include_in_schema=False)
+def root_head():
+    return
+
 
 #  Startup Event 
 @app.on_event("startup")
