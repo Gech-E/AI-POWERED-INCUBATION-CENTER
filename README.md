@@ -22,11 +22,11 @@ Built with **Next.js (TypeScript)** + **FastAPI (Python)** + **PostgreSQL**.
 
 ```mermaid
 graph TB
-  FE[Next.js Dashboard] -->|HTTP/JSON + JWT| API[FastAPI REST API]
-  API --> DB[(PostgreSQL)]
-  API --> AI[AI Services]
-  AI --> LLM[OpenAI/Gemini (optional)]
-  AI --> FALLBACK[Rule-based fallback]
+  FE["Next.js Dashboard"] -->|"HTTP/JSON + JWT"| API["FastAPI REST API"]
+  API --> DB[("PostgreSQL")]
+  API --> AI["AI Services"]
+  AI --> LLM["LLM Provider (OpenAI or Gemini)"]
+  AI --> FALLBACK["Rule-based fallback"]
 ```
 
 ## 📁 Repo structure
