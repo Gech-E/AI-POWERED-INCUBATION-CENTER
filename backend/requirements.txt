@@ -1,5 +1,6 @@
 fastapi==0.109.0
 uvicorn[standard]==0.27.0
+gunicorn==21.2.0
 sqlalchemy
 alembic
 psycopg[binary]
@@ -22,5 +23,8 @@ pydantic-settings
 openai==1.10.0
 google-generativeai
 httpx==0.26.0
+
+# ── Dev / Test (not needed at runtime) ──────────────────────────────
 pytest==7.4.4
 pytest-asyncio==0.23.3
+

@@ -3,14 +3,17 @@ from __future__ import annotations
 
 from pydantic_settings import BaseSettings
 from functools import lru_cache
-from pydantic import model_validator
+from pydantic import computed_field, model_validator
 
 
 class Settings(BaseSettings):
     # Application
     APP_NAME: str = "MU Innovation Hub"
     APP_VERSION: str = "1.0.0"
-    DEBUG: bool = True
+    DEBUG: bool = False  # Safe default — override with DEBUG=True locally
+
+    # Server
+    PORT: int = 8000  # Render injects $PORT
 
     # Database
     DATABASE_URL: str = "sqlite:///./incubation.db"
@@ -25,12 +28,23 @@ class Settings(BaseSettings):
     GOOGLE_API_KEY: str = ""
     LLM_PROVIDER: str = "openai"  # "openai" or "google"
 
-    # CORS
-    FRONTEND_URL: str = "https://ai-powered-incubation-center-hp3i.vercel.app"
+    # CORS — set FRONTEND_URL to your Vercel domain in production
+    FRONTEND_URL: str = ""
 
     class Config:
         env_file = ".env"
         case_sensitive = True
+
+    @computed_field  # type: ignore[misc]
+    @property
+    def ALLOWED_ORIGINS(self) -> list[str]:
+        """Build the CORS allow-origins list dynamically."""
+        origins: list[str] = []
+        if self.FRONTEND_URL:
+            origins.append(self.FRONTEND_URL.rstrip("/"))
+        if self.DEBUG:
+            origins += ["http://localhost:3000", "http://127.0.0.1:3000"]
+        return origins
 
     @model_validator(mode="after")
     def _validate_required_secrets(self) -> "Settings":
