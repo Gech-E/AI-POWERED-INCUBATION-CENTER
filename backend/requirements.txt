@@ -3,6 +3,10 @@ uvicorn[standard]==0.27.0
 sqlalchemy
 alembic
 psycopg[binary]
+# SQLAlchemy's default Postgres driver is psycopg2. We include it for production
+# (Render uses Python 3.11 wheels), but avoid installing it on Python 3.13+ where
+# Windows builds often require a compiler toolchain.
+psycopg2-binary==2.9.9; python_version < "3.13"
 python-jose[cryptography]==3.3.0
 passlib[bcrypt]==1.7.4
 bcrypt<4
