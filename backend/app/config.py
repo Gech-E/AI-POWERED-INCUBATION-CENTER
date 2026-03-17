@@ -26,7 +26,7 @@ class Settings(BaseSettings):
     LLM_PROVIDER: str = "openai"  # "openai" or "google"
 
     # CORS
-    FRONTEND_URL: str = "http://localhost:3000"
+    FRONTEND_URL: str = "https://ai-powered-incubation-center-hp3i.vercel.app"
 
     class Config:
         env_file = ".env"
