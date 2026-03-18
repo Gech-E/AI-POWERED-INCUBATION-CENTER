@@ -96,7 +96,9 @@ class TestAuthFlow:
 
     def test_get_profile_no_auth(self, client):
         resp = client.get("/api/auth/me")
-        assert resp.status_code == 403
+        # HTTPBearer returns 403 when auth header missing in some configs,
+        # but our dependency returns 401 Unauthorized for missing/invalid credentials.
+        assert resp.status_code == 401
 
     def test_update_profile(self, client, student_token):
         resp = client.put("/api/auth/me", json={
@@ -573,7 +575,7 @@ class TestChatbotFlow:
         resp = client.post("/api/chatbot/chat", json={
             "message": "Hello",
         })
-        assert resp.status_code == 403
+        assert resp.status_code == 401
 
 
 # ══════════════════════════════════════════════════════════════════════
@@ -588,15 +590,18 @@ class TestMentorSessionFlow:
         assert len(mentors) >= 1
         mentor_id = mentors[0]["id"]
 
-        resp = client.post(
-            f"/api/mentors/sessions?mentor_id={mentor_id}&idea_id={TestIdeasFlow.idea_id}"
-            f"&session_date=2026-04-15T14:00:00Z&duration_minutes=45",
-            headers=auth_header(student_token),
-        )
+        resp = client.post("/api/mentors/sessions", json={
+            "mentor_id": mentor_id,
+            "idea_id": TestIdeasFlow.idea_id,
+            "session_date": "2026-04-15T14:00:00Z",
+            "duration_minutes": 45,
+            "notes": "Discuss MVP scope and go-to-market.",
+        }, headers=auth_header(student_token))
         assert resp.status_code == 200
         data = resp.json()
-        assert data["status"] == "booked"
         assert "id" in data
+        assert data["duration_minutes"] == 45
+        assert data["mentor_id"] == mentor_id
 
     def test_list_sessions(self, client, student_token):
         resp = client.get(

@@ -5,6 +5,7 @@ Overrides the production PostgreSQL engine with SQLite so tests run
 without any external dependencies.
 """
 import os
+import time
 import pytest
 from sqlalchemy import create_engine, event
 from sqlalchemy.orm import sessionmaker
@@ -56,9 +57,17 @@ def setup_database():
     Base.metadata.create_all(bind=engine)
     yield
     Base.metadata.drop_all(bind=engine)
+    # Ensure all SQLite file handles are released on Windows
+    engine.dispose()
     # Clean up the test DB file
     if os.path.exists("test_e2e.db"):
-        os.remove("test_e2e.db")
+        # Windows can keep file handles briefly; retry a few times.
+        for _ in range(8):
+            try:
+                os.remove("test_e2e.db")
+                break
+            except PermissionError:
+                time.sleep(0.15)
 
 
 @pytest.fixture(scope="session")
