@@ -49,14 +49,13 @@ export default function ThemeToggle() {
       style={{
         position: "fixed",
         right: 16,
-        top: "50%",
-        transform: "translateY(-50%)",
+        top: 14,
         zIndex: 80,
         display: "flex",
-        flexDirection: "column",
-        gap: 8,
-        padding: 10,
-        borderRadius: 999,
+        flexDirection: "row",
+        gap: 6,
+        padding: 8,
+        borderRadius: 9999,
       }}
       className="glass"
     >
@@ -64,13 +63,14 @@ export default function ThemeToggle() {
         style={{
           position: "absolute",
           left: 10,
-          right: 10,
-          top: 10 + activeIdx * 40,
-          height: 36,
+          top: 8,
+          width: 84,
+          transform: `translateX(${activeIdx * 90}px)`,
+          height: 34,
           borderRadius: 999,
           background: "linear-gradient(135deg, rgba(99,102,241,0.22), rgba(6,214,160,0.16))",
           border: "1px solid rgba(99,102,241,0.22)",
-          transition: "top 180ms ease",
+          transition: "transform 180ms ease",
           pointerEvents: "none",
         }}
       />
