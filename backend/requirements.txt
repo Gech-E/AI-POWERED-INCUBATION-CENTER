@@ -1,5 +1,5 @@
-fastapi==0.109.0
-uvicorn[standard]==0.27.0
+fastapi>=0.115.0
+uvicorn[standard]>=0.34.0
 gunicorn==21.2.0
 sqlalchemy
 alembic
@@ -7,11 +7,11 @@ psycopg[binary]
 # SQLAlchemy's default Postgres driver is psycopg2. We include it for production
 # (Render uses Python 3.11 wheels), but avoid installing it on Python 3.13+ where
 # Windows builds often require a compiler toolchain.
-psycopg2-binary==2.9.9; python_version < "3.13"
+psycopg2-binary; 
 python-jose[cryptography]==3.3.0
 passlib[bcrypt]==1.7.4
 bcrypt<4
-python-multipart==0.0.6
+python-multipart>=0.0.18
 python-dotenv==1.0.0
 pydantic[email]
 pydantic-settings
@@ -20,9 +20,9 @@ pydantic-settings
 # setups working on newer Python versions without requiring a C/C++ toolchain.
 # The recommender uses a dependency-free TF‑IDF cosine similarity implementation.
 #
-openai==1.10.0
+openai>=1.60.0
 google-generativeai
-httpx==0.26.0
+httpx>=0.27.0
 
 # ── Dev / Test (not needed at runtime) ──────────────────────────────
 pytest==7.4.4
