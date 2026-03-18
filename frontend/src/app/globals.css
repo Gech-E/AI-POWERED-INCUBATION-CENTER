@@ -16,6 +16,8 @@
   --clr-warn: #f59e0b;
   --clr-text: #f1f5f9;
   --clr-muted: #94a3b8;
+  --clr-glass-bg: rgba(30, 37, 54, 0.65);
+  --clr-glass-border: var(--clr-border);
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
   --radius-sm: 0.5rem;
   --radius-md: 0.75rem;
@@ -23,7 +25,23 @@
   --radius-xl: 1.25rem;
 }
 
-
+/* ── Light Mode ───────────────────────────────────────────────── */
+[data-theme="light"] {
+  --clr-bg: #f0f2f5;
+  --clr-surface: #ffffff;
+  --clr-card: #ffffff;
+  --clr-border: #d1d5db;
+  --clr-primary: #4f46e5;
+  --clr-primary-l: #6366f1;
+  --clr-accent: #059669;
+  --clr-accent-l: #10b981;
+  --clr-danger: #dc2626;
+  --clr-warn: #d97706;
+  --clr-text: #111827;
+  --clr-muted: #6b7280;
+  --clr-glass-bg: rgba(255, 255, 255, 0.75);
+  --clr-glass-border: #d1d5db;
+}
 
 /* ── Reset & Base ──────────────────────────────────────────────── */
 *,
@@ -43,13 +61,14 @@ body {
   color: var(--clr-text);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* ── Utility classes ───────────────────────────────────────────── */
 .glass {
-  background: rgba(30, 37, 54, 0.65);
+  background: var(--clr-glass-bg);
   backdrop-filter: blur(16px);
-  border: 1px solid var(--clr-border);
+  border: 1px solid var(--clr-glass-border);
 }
 
 .card {

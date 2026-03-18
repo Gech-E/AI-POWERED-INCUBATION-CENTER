@@ -4,6 +4,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { clearToken, getUser } from "@/lib/api";
 import ChatbotWidget from "@/components/ChatbotWidget";
+import ThemeToggle from "@/components/ThemeToggle";
 
 const NAV_ITEMS = [
   { href: "/dashboard", icon: "", label: "Dashboard" },
@@ -78,6 +79,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
             {NAV_ITEMS.find((n) => n.href === pathname)?.label || "Dashboard"}
           </h2>
           <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
+            <ThemeToggle />
             <span className="tag">{user.role}</span>
             <span style={{ fontSize: "0.9rem", fontWeight: 500 }}>{user.full_name}</span>
           </div>
