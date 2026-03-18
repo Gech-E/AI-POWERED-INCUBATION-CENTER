@@ -43,6 +43,24 @@
   --clr-glass-border: #d1d5db;
 }
 
+/* ── Aurora Mode (tech + growth) ───────────────────────────────── */
+[data-theme="aurora"] {
+  --clr-bg: #071018;
+  --clr-surface: #0b1b26;
+  --clr-card: #0f2432;
+  --clr-border: rgba(148, 163, 184, 0.18);
+  --clr-primary: #22c55e;
+  --clr-primary-l: #34d399;
+  --clr-accent: #38bdf8;
+  --clr-accent-l: #7dd3fc;
+  --clr-danger: #fb7185;
+  --clr-warn: #fbbf24;
+  --clr-text: #e6f3ff;
+  --clr-muted: rgba(230, 243, 255, 0.72);
+  --clr-glass-bg: rgba(15, 36, 50, 0.65);
+  --clr-glass-border: rgba(125, 211, 252, 0.22);
+}
+
 /* ── Reset & Base ──────────────────────────────────────────────── */
 *,
 *::before,
@@ -62,6 +80,13 @@ body {
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Improve focus visibility */
+:focus-visible {
+  outline: 3px solid rgba(99, 102, 241, 0.35);
+  outline-offset: 2px;
+  border-radius: 8px;
 }
 
 /* ── Utility classes ───────────────────────────────────────────── */
