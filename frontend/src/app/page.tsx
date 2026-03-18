@@ -1,5 +1,6 @@
 "use client";
 import Link from "next/link";
+import ThemeToggle from "@/components/ThemeToggle";
 
 const FEATURES = [
   { icon: "", title: "AI Idea Evaluation", desc: "Submit your startup idea and get instant AI-powered scoring across market potential, technical feasibility, innovation, and team capability." },
@@ -39,6 +40,7 @@ export default function LandingPage() {
           <span className="gradient-text">MU Innovation Hub</span>
         </Link>
         <div style={{ display: "flex", gap: "0.75rem", alignItems: "center" }}>
+          <ThemeToggle />
           <Link href="/login" className="btn btn-ghost">Sign In</Link>
           <Link href="/register" className="btn btn-primary">Get Started</Link>
         </div>

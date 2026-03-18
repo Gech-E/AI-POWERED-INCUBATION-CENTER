@@ -47,10 +47,7 @@ export default function ThemeToggle() {
     <div
       aria-label="Theme toggle"
       style={{
-        position: "fixed",
-        right: 16,
-        top: 14,
-        zIndex: 80,
+        position: "relative",
         display: "flex",
         flexDirection: "row",
         gap: 6,
